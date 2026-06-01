@@ -32,26 +32,56 @@ export const adminProcedure = t.procedure.use(isAdmin);
 
 export const authRouter = router({
   signup: publicProcedure
-    .input(z.object({ email: z.string().email(), name: z.string().min(2), password: z.string().min(6) }))
+    .input(
+      z.object({
+        email: z.email(),
+        name: z.string().min(2),
+        password: z.string().min(6),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
-      const exists = await ctx.prisma.user.findUnique({ where: { email: input.email } });
-      if (exists) throw new TRPCError({ code: "CONFLICT", message: "Email already in use" });
+      const exists = await ctx.prisma.user.findUnique({
+        where: { email: input.email },
+      });
+      if (exists)
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: "Email already in use",
+        });
       const hashed = await bcrypt.hash(input.password, 10);
       const user = await ctx.prisma.user.create({
         data: { email: input.email, name: input.name, password: hashed },
       });
-      return { id: user.id, email: user.email, name: user.name, role: user.role };
+      return {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      };
     }),
 
   signin: publicProcedure
-    .input(z.object({ email: z.string().email(), password: z.string() }))
+    .input(z.object({ email: z.email(), password: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      const user = await ctx.prisma.user.findUnique({ where: { email: input.email } });
+      const user = await ctx.prisma.user.findUnique({
+        where: { email: input.email },
+      });
       if (!user || !(await bcrypt.compare(input.password, user.password)))
-        throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid credentials" });
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Invalid credentials",
+        });
       const { createSession } = await import("../session");
       const token = await createSession(user.id);
-      return { token, user: { id: user.id, email: user.email, name: user.name, role: user.role } };
+      return {
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        },
+      };
     }),
 
   me: protectedProcedure.query(({ ctx }) => {
@@ -68,7 +98,15 @@ export const authRouter = router({
 
 export const userRouter = router({
   list: adminProcedure.query(async ({ ctx }) => {
-    return ctx.prisma.user.findMany({ select: { id: true, email: true, name: true, role: true, createdAt: true } });
+    return ctx.prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        createdAt: true,
+      },
+    });
   }),
 
   updateRole: adminProcedure
