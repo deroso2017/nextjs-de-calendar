@@ -27,25 +27,43 @@ export function Navbar() {
       </Link>
 
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">
-          {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          className="cursor-pointer"
+        >
+          {theme === "dark" ? (
+            <Sun className="h-4 w-4" />
+          ) : (
+            <Moon className="h-4 w-4" />
+          )}
         </Button>
 
         {user ? (
           <>
+            {/* Weather button */}
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/weather">Weather</Link>
+            </Button>
+            {user.role === "admin" && (
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/admin">
+                  <Settings className="h-4 w-4 mr-1" />
+                  Admin
+                </Link>
+              </Button>
+            )}
             <span className="text-sm text-muted-foreground hidden sm:block">
               {user.name} ({user.role})
             </span>
-            {user.role === "admin" && (
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/admin"><Settings className="h-4 w-4 mr-1" />Admin</Link>
-              </Button>
-            )}
             <Button
               variant="ghost"
               size="sm"
               onClick={() => signoutMutation.mutate()}
               disabled={signoutMutation.isPending}
+              className="cursor-pointer"
             >
               <LogOut className="h-4 w-4 mr-1" />
               Abmelden
@@ -53,10 +71,15 @@ export function Navbar() {
           </>
         ) : (
           <>
-            <Button variant="ghost" size="sm" asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              asChild
+              className="cursor-pointer"
+            >
               <Link href="/auth/signin">Anmelden</Link>
             </Button>
-            <Button size="sm" asChild>
+            <Button size="sm" asChild className="cursor-pointer">
               <Link href="/auth/signup">Registrieren</Link>
             </Button>
           </>

@@ -89,9 +89,11 @@ export const authRouter = router({
     return { id, email, name, role };
   }),
 
-  signout: protectedProcedure.mutation(async ({ ctx }) => {
+  signout: publicProcedure.mutation(async ({ ctx }) => {
     const { deleteSession } = await import("../session");
-    await deleteSession(ctx.session.token);
+
+    if (ctx.session) await deleteSession(ctx.session.token);
+
     return { success: true };
   }),
 });
