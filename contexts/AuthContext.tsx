@@ -1,5 +1,6 @@
 "use client";
 
+import { RouterOutputs } from "@/lib/trpc/client";
 import {
   createContext,
   useContext,
@@ -8,7 +9,7 @@ import {
   ReactNode,
 } from "react";
 
-type User = { id: string; email: string; name: string; role: string };
+type User = RouterOutputs["user"]["list"][number];
 
 type AuthContextType = {
   user: User | null;
