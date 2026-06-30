@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { trpc } from "@/lib/trpc/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function SignInPage() {
+  const t = useTranslations("Login");
+
   const router = useRouter();
   const { signIn } = useAuth();
   const [email, setEmail] = useState("");
@@ -31,7 +34,7 @@ export default function SignInPage() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Anmelden</CardTitle>
+          <CardTitle>{t("signIn")}</CardTitle>
         </CardHeader>
         <CardContent>
           <form
@@ -43,7 +46,7 @@ export default function SignInPage() {
             className="space-y-4"
           >
             <div className="space-y-1">
-              <Label htmlFor="email">E-Mail</Label>
+              <Label htmlFor="email">{t("email")}</Label>
               <Input
                 id="email"
                 type="email"
@@ -52,8 +55,9 @@ export default function SignInPage() {
                 required
               />
             </div>
+
             <div className="space-y-1">
-              <Label htmlFor="password">Passwort</Label>
+              <Label htmlFor="password">{t("password")}</Label>
 
               <div className="relative">
                 <Input
@@ -70,7 +74,7 @@ export default function SignInPage() {
                   onClick={() => setShowPassword((prev) => !prev)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:opacity-60 hover:cursor-pointer"
                   aria-label={
-                    showPassword ? "Passwort verbergen" : "Passwort anzeigen"
+                    showPassword ? t("hidePassword") : t("showPassword")
                   }
                 >
                   {showPassword ? (
@@ -81,21 +85,24 @@ export default function SignInPage() {
                 </button>
               </div>
             </div>
+
             {error && <p className="text-sm text-destructive">{error}</p>}
+
             <Button
               type="submit"
-              className="w-full"
+              className="w-full cursor-pointer hover:opacity-80"
               disabled={mutation.isPending}
             >
-              {mutation.isPending ? "Wird angemeldet..." : "Anmelden"}
+              {mutation.isPending ? t("signingIn") : t("signIn")}
             </Button>
+
             <p className="text-sm text-center text-muted-foreground">
-              Noch kein Konto?{" "}
+              {t("noAccount")}{" "}
               <Link
                 href="/auth/signup"
                 className="text-primary hover:underline"
               >
-                Registrieren
+                {t("register")}
               </Link>
             </p>
           </form>
