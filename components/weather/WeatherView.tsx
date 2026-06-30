@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -10,6 +9,7 @@ import { WeatherState } from "./types";
 import { Spinner } from "../ui/spinner";
 import HourlyForecast from "./HourlyForecast";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 function getIcon(code: number) {
   if (code === 0) return <Sun className="h-5 w-5 text-yellow-400" />;
@@ -19,6 +19,8 @@ function getIcon(code: number) {
 }
 
 export default function WeatherView() {
+  const t = useTranslations("Weather");
+
   const [city, setCity] = useState("Köln");
   const [data, setData] = useState<WeatherState | null>(null);
   const [tab, setTab] = useState<"now" | "today" | "week">("now");
@@ -37,10 +39,11 @@ export default function WeatherView() {
       const geoRes = await fetch(
         `https://geocoding-api.open-meteo.com/v1/search?name=${city}`,
       );
+
       const geo = await geoRes.json();
 
       if (!geo?.results?.length) {
-        setError("City not found");
+        setError(t("cityNotFound"));
         setData(null);
         return;
       }
@@ -60,7 +63,7 @@ export default function WeatherView() {
       const w = await res.json();
 
       if (!w?.current_weather) {
-        setError("Weather data unavailable");
+        setError(t("dataUnavailable"));
         setData(null);
         return;
       }
@@ -68,20 +71,17 @@ export default function WeatherView() {
       setData({
         name: place.name,
         country: place.country,
-
         now: {
           temperature: w.current_weather.temperature,
           windspeed: w.current_weather.windspeed,
           weathercode: w.current_weather.weathercode,
         },
-
         hourly:
           w.hourly?.time?.map((t: string, i: number) => ({
             time: t,
             temperature: w.hourly.temperature_2m[i],
             weathercode: w.hourly.weathercode[i],
           })) ?? [],
-
         daily:
           w.daily?.time?.map((t: string, i: number) => ({
             date: t,
@@ -100,33 +100,32 @@ export default function WeatherView() {
     }
   };
 
-  // Get hourly data for a full day (00:00 → 23:00)
-  const getDayHours = (date: string) => {
-    return data?.hourly.filter((h) => h.time.startsWith(date)) ?? [];
-  };
+  const getDayHours = (date: string) =>
+    data?.hourly.filter((h) => h.time.startsWith(date)) ?? [];
 
   return (
     <div className="min-h-screen bg-background text-foreground p-6 flex justify-center">
       <div className="w-full max-w-4xl space-y-6">
-        {/* Search */}
+        {/* SEARCH */}
         <Card className="p-4 bg-card/60 backdrop-blur">
           <div className="flex gap-2">
             <Input
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              placeholder="Enter city..."
+              placeholder={t("enterCity")}
             />
 
             <Button onClick={() => fetchWeather(false)} disabled={loading}>
-              {loading ? <Spinner className="h-4 w-4" /> : "Search"}
+              {loading ? <Spinner className="h-4 w-4" /> : t("search")}
             </Button>
+
             {data && (
               <Button
                 variant="outline"
                 size="icon"
                 onClick={() => fetchWeather(true)}
                 disabled={loading}
-                title="Refresh weather"
+                title={t("search")}
               >
                 <RefreshCw
                   className={cn("h-4 w-4", loading && "animate-spin")}
@@ -136,31 +135,29 @@ export default function WeatherView() {
           </div>
         </Card>
 
-        {/* Error */}
+        {/* ERROR */}
         {error && (
           <Card className="p-4 text-red-500 bg-card/60 backdrop-blur">
             {error}
           </Card>
         )}
 
-        {/* Empty */}
+        {/* EMPTY */}
         {!data && !loading && (
           <Card className="p-6 text-center bg-card/60 backdrop-blur">
-            <p className="text-muted-foreground">
-              Search a city to view weather
-            </p>
+            <p className="text-muted-foreground">{t("searchHint")}</p>
           </Card>
         )}
 
         {/* DATA */}
         {data && (
           <>
-            {/* Location */}
+            {/* LOCATION */}
             <div className="text-center text-muted-foreground">
               {data.name}, {data.country}
             </div>
 
-            {/* Tabs */}
+            {/* TABS */}
             <div className="grid grid-cols-3 gap-2">
               <Button
                 variant={tab === "now" ? "default" : "outline"}
@@ -169,7 +166,7 @@ export default function WeatherView() {
                   setSelectedDay(null);
                 }}
               >
-                Now
+                {t("now")}
               </Button>
 
               <Button
@@ -179,14 +176,14 @@ export default function WeatherView() {
                   setSelectedDay(null);
                 }}
               >
-                Today
+                {t("today")}
               </Button>
 
               <Button
                 variant={tab === "week" ? "default" : "outline"}
                 onClick={() => setTab("week")}
               >
-                7 Days
+                {t("week")}
               </Button>
             </div>
 
@@ -202,7 +199,7 @@ export default function WeatherView() {
                 </div>
 
                 <p className="text-muted-foreground">
-                  Wind: {data.now.windspeed} km/h
+                  {t("wind")}: {data.now.windspeed} km/h
                 </p>
               </Card>
             )}
@@ -218,14 +215,11 @@ export default function WeatherView() {
             {/* WEEK */}
             {tab === "week" && (
               <div className="space-y-3">
-                {/* Days list */}
                 {data.daily.map((d) => (
                   <Card
                     key={d.date}
                     onClick={() => {
                       setSelectedDay(d.date);
-
-                      // wait for render then scroll
                       setTimeout(() => {
                         hourlyRef.current?.scrollIntoView({
                           behavior: "smooth",
@@ -260,11 +254,10 @@ export default function WeatherView() {
                   </Card>
                 ))}
 
-                {/* Hourly view for selected day */}
                 {selectedDay && (
                   <HourlyForecast
                     ref={hourlyRef}
-                    title="Hourly Forecast"
+                    title={t("hourlyForecast")}
                     hours={getDayHours(selectedDay)}
                     getIcon={getIcon}
                   />

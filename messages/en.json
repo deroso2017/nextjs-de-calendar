@@ -1,0 +1,106 @@
+{
+  "Home": {
+    "title": "Welcome to DE Calendar",
+    "subtitle": "Discover all German holidays by federal state. Sign in or create an account to get started.",
+    "login": "Sign in",
+    "register": "Register",
+    "features": [
+      {
+        "title": "All federal states",
+        "desc": "Holidays for all 16 German states at a glance."
+      },
+      {
+        "title": "Always up to date",
+        "desc": "Movable holidays like Easter are calculated automatically."
+      },
+      {
+        "title": "Dark mode",
+        "desc": "Comfortable viewing day and night."
+      }
+    ]
+  },
+  "Navbar": {
+    "title": "DE Calendar",
+    "language": "Language",
+    "english": "English",
+    "german": "German",
+    "toggleTheme": "Toggle theme",
+    "weather": "Weather",
+    "admin": "Admin",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
+  },
+  "AdminDashboard": {
+    "title": "Admin Dashboard",
+    "subtitle": "System overview",
+    "users": "Users",
+    "admins": "Admins",
+    "normalUsers": "Normal users",
+    "quickAccess": "Quick actions",
+    "manageUsers": "Manage users",
+    "settings": "Settings"
+  },
+  "AdminSettings": {
+    "title": "Settings",
+    "subtitle": "Manage your system and profile",
+    "profile": "Profile",
+    "name": "Name",
+    "email": "Email",
+    "save": "Save",
+    "system": "System",
+    "systemHint": "System-wide settings (extendable later)",
+    "clearCache": "Clear cache",
+    "showLogs": "View logs",
+    "danger": "Danger Zone",
+    "dangerHint": "These actions cannot be undone.",
+    "resetSystem": "Reset system",
+    "resetConfirm": "Are you sure you want to reset system settings?"
+  },
+  "Users": {
+    "title": "User Management",
+    "users": "Users",
+    "delete": "Delete",
+    "confirmDelete": "Do you really want to delete {{name}}?"
+  },
+  "Calendar": {
+    "today": "Today",
+    "selectState": "Select state",
+    "holidaysInMonth": "Holidays in",
+    "weekdays": {
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "sun": "Sun"
+    },
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ]
+  },
+  "Weather": {
+    "search": "Search",
+    "enterCity": "Enter city...",
+    "cityNotFound": "City not found",
+    "dataUnavailable": "Weather data unavailable",
+    "searchHint": "Search a city to view weather",
+    "now": "Now",
+    "today": "Today",
+    "week": "7 Days",
+    "wind": "Wind",
+    "hourlyForecast": "Hourly Forecast"
+  }
+}

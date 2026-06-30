@@ -1,0 +1,106 @@
+{
+  "Home": {
+    "title": "Willkommen beim DE Kalender",
+    "subtitle": "Entdecke alle deutschen Feiertage für jedes Bundesland. Melde dich an oder erstelle ein Konto, um loszulegen.",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "features": [
+      {
+        "title": "Alle Bundesländer",
+        "desc": "Feiertage für alle 16 Bundesländer auf einen Blick."
+      },
+      {
+        "title": "Immer aktuell",
+        "desc": "Bewegliche Feiertage wie Ostern werden automatisch berechnet."
+      },
+      {
+        "title": "Dark Mode",
+        "desc": "Angenehme Ansicht bei Tag und Nacht."
+      }
+    ]
+  },
+  "Navbar": {
+    "title": "DE Kalender",
+    "language": "Sprache",
+    "english": "Englisch",
+    "german": "Deutsch",
+    "toggleTheme": "Design wechseln",
+    "weather": "Wetter",
+    "admin": "Admin",
+    "logout": "Abmelden",
+    "login": "Anmelden",
+    "register": "Registrieren"
+  },
+  "AdminDashboard": {
+    "title": "Admin Dashboard",
+    "subtitle": "Übersicht über dein System",
+    "users": "Benutzer",
+    "admins": "Admins",
+    "normalUsers": "Normale Nutzer",
+    "quickAccess": "Schnellzugriff",
+    "manageUsers": "Benutzer verwalten",
+    "settings": "Einstellungen"
+  },
+  "AdminSettings": {
+    "title": "Einstellungen",
+    "subtitle": "Verwalte dein System und dein Profil",
+    "profile": "Profil",
+    "name": "Name",
+    "email": "E-Mail",
+    "save": "Speichern",
+    "system": "System",
+    "systemHint": "Systemweite Einstellungen (später erweiterbar)",
+    "clearCache": "Cache leeren",
+    "showLogs": "Logs anzeigen",
+    "danger": "Danger Zone",
+    "dangerHint": "Diese Aktionen sind nicht rückgängig zu machen.",
+    "resetSystem": "System zurücksetzen",
+    "resetConfirm": "Bist du sicher, dass du die Systemeinstellungen zurücksetzen möchtest?"
+  },
+  "Users": {
+    "title": "Benutzerverwaltung",
+    "users": "Benutzer",
+    "delete": "Löschen",
+    "confirmDelete": "Möchtest du {{name}} wirklich löschen?"
+  },
+  "Calendar": {
+    "today": "Heute",
+    "selectState": "Bundesland wählen",
+    "holidaysInMonth": "Feiertage im",
+    "weekdays": {
+      "mon": "Mo",
+      "tue": "Di",
+      "wed": "Mi",
+      "thu": "Do",
+      "fri": "Fr",
+      "sat": "Sa",
+      "sun": "So"
+    },
+    "months": [
+      "Januar",
+      "Februar",
+      "März",
+      "April",
+      "Mai",
+      "Juni",
+      "Juli",
+      "August",
+      "September",
+      "Oktober",
+      "November",
+      "Dezember"
+    ]
+  },
+  "Weather": {
+    "search": "Suchen",
+    "enterCity": "Stadt eingeben...",
+    "cityNotFound": "Stadt nicht gefunden",
+    "dataUnavailable": "Wetterdaten nicht verfügbar",
+    "searchHint": "Suche eine Stadt, um das Wetter zu sehen",
+    "now": "Jetzt",
+    "today": "Heute",
+    "week": "7 Tage",
+    "wind": "Wind",
+    "hourlyForecast": "Stündliche Vorhersage"
+  }
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuth } from "@/contexts/AuthContext";
 import { trpc } from "@/lib/trpc/client";
 import { Button } from "@/components/ui/button";
@@ -11,8 +13,11 @@ import {
 } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function Users() {
+  const t = useTranslations("Users");
+
   const { user } = useAuth();
   const router = useRouter();
 
@@ -38,17 +43,16 @@ export default function Users() {
           onClick={() => router.push("/admin")}
           className="cursor-pointer transition-opacity hover:opacity-60"
         >
-          {" "}
           <ArrowLeft className="h-4 w-4" />
         </Button>
 
-        <h1 className="text-xl font-bold">Benutzerverwaltung</h1>
+        <h1 className="text-xl font-bold">{t("title")}</h1>
       </div>
 
       {/* CARD */}
       <Card>
         <CardHeader>
-          <CardTitle>Benutzer</CardTitle>
+          <CardTitle>{t("users")}</CardTitle>
         </CardHeader>
 
         <CardContent>
@@ -79,7 +83,7 @@ export default function Users() {
                     </SelectTrigger>
 
                     <SelectContent>
-                      <SelectItem value="user">Benutzer</SelectItem>
+                      <SelectItem value="user">User</SelectItem>
                       <SelectItem value="admin">Admin</SelectItem>
                     </SelectContent>
                   </Select>
@@ -89,12 +93,12 @@ export default function Users() {
                     size="sm"
                     disabled={u.id === user?.id}
                     onClick={() => {
-                      if (confirm(`${u.name} löschen?`)) {
+                      if (confirm(t("confirmDelete", { name: u.name }))) {
                         deleteUser.mutate({ userId: u.id });
                       }
                     }}
                   >
-                    Löschen
+                    {t("delete")}
                   </Button>
                 </div>
               </div>
