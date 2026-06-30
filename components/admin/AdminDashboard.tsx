@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth, User } from "@/contexts/AuthContext";
 import { trpc } from "@/lib/trpc/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ export default function AdminDashboard() {
 
   const { user } = useAuth();
 
-  const { data: users } = trpc.user.list.useQuery(undefined, {
+  const { data: users } = trpc.user.list.useQuery<User[]>(undefined, {
     enabled: !!user && user.role === "admin",
   });
 
