@@ -102,5 +102,27 @@
     "week": "7 Days",
     "wind": "Wind",
     "hourlyForecast": "Hourly Forecast"
+  },
+  "Login": {
+    "signIn": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "signingIn": "Signing in...",
+    "noAccount": "Don't have an account?",
+    "register": "Register"
+  },
+  "Register": {
+    "title": "Register",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "register": "Register",
+    "registering": "Registering...",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign In"
   }
 }

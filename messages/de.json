@@ -102,5 +102,27 @@
     "week": "7 Tage",
     "wind": "Wind",
     "hourlyForecast": "Stündliche Vorhersage"
+  },
+  "Login": {
+    "signIn": "Anmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen",
+    "signingIn": "Wird angemeldet...",
+    "noAccount": "Noch kein Konto?",
+    "register": "Registrieren"
+  },
+  "Register": {
+    "title": "Registrieren",
+    "name": "Name",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen",
+    "register": "Registrieren",
+    "registering": "Wird registriert...",
+    "alreadyHaveAccount": "Bereits ein Konto?",
+    "signIn": "Anmelden"
   }
 }
