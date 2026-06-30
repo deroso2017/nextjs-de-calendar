@@ -13,7 +13,7 @@
 [![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org/)
 [![Zod](https://img.shields.io/badge/Zod-4-3E67B1?style=for-the-badge&logo=zod&logoColor=white)](https://zod.dev/)
 
-[Live Demo](https://nextjs-de-calendar.vercel.app)
+<!-- [Live Demo](https://nextjs-de-calendar.vercel.app) -->
 
 </div>
 
@@ -21,14 +21,14 @@
 
 ## ✨ Features
 
-| | Feature | Description |
-|---|---|---|
-| 🔐 | **Authentication** | Sign up, sign in, sign out with server-side sessions |
-| 👥 | **Role-Based Access** | `user` and `admin` roles with protected routes |
-| 🛡️ | **Admin Dashboard** | Manage users, update roles, delete accounts |
-| 📅 | **Calendar View** | Interactive calendar with public holiday support |
-| 🌙 | **Dark Mode** | System-aware theme with manual toggle |
-| ⚡ | **End-to-End Type Safety** | tRPC + Zod — fully typed from database to UI |
+|     | Feature                    | Description                                          |
+| --- | -------------------------- | ---------------------------------------------------- |
+| 🔐  | **Authentication**         | Sign up, sign in, sign out with server-side sessions |
+| 👥  | **Role-Based Access**      | `user` and `admin` roles with protected routes       |
+| 🛡️  | **Admin Dashboard**        | Manage users, update roles, delete accounts          |
+| 📅  | **Calendar View**          | Interactive calendar with public holiday support     |
+| 🌙  | **Dark Mode**              | System-aware theme with manual toggle                |
+| ⚡  | **End-to-End Type Safety** | tRPC + Zod — fully typed from database to UI         |
 
 ---
 
@@ -190,10 +190,10 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Default Credentials (after seed)
 
-| Role | Email | Password |
-|---|---|---|
+| Role  | Email               | Password   |
+| ----- | ------------------- | ---------- |
 | Admin | `admin@example.com` | `password` |
-| User | `user@example.com` | `password` |
+| User  | `user@example.com`  | `password` |
 
 ---
 
