@@ -13,6 +13,8 @@
 [![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org/)
 [![Zod](https://img.shields.io/badge/Zod-4-3E67B1?style=for-the-badge&logo=zod&logoColor=white)](https://zod.dev/)
 
+[Live Demo](https://nextjs-de-calendar.vercel.app)
+
 </div>
 
 ---
