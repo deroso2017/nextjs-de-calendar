@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth, User } from "@/contexts/AuthContext";
 import { trpc } from "@/lib/trpc/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,7 +21,7 @@ export default function Users() {
   const { user } = useAuth();
   const router = useRouter();
 
-  const { data: users, refetch } = trpc.user.list.useQuery(undefined, {
+  const { data: users, refetch } = trpc.user.list.useQuery<User[]>(undefined, {
     enabled: !!user && user.role === "admin",
   });
 
