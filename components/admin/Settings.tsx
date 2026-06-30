@@ -7,8 +7,10 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function AdminSettings() {
+  const t = useTranslations("AdminSettings");
   const { user } = useAuth();
   const router = useRouter();
 
@@ -16,17 +18,13 @@ export default function AdminSettings() {
   const [email, setEmail] = useState(user?.email ?? "");
 
   const handleSaveProfile = () => {
-    // TODO: replace with tRPC mutation
     console.log("Saving profile:", { name, email });
   };
 
   const handleResetSystem = () => {
-    const confirmed = confirm(
-      "Are you sure you want to reset system settings?",
-    );
+    const confirmed = confirm(t("resetConfirm"));
     if (!confirmed) return;
 
-    // TODO: system reset logic
     console.log("System reset triggered");
   };
 
@@ -40,59 +38,56 @@ export default function AdminSettings() {
           onClick={() => router.push("/admin")}
           className="cursor-pointer transition-opacity hover:opacity-60"
         >
-          {" "}
           <ArrowLeft className="h-4 w-4" />
         </Button>
-        <h1 className="text-2xl font-bold">Einstellungen</h1>
-        <p className="text-muted-foreground">
-          Verwalte dein System und dein Profil
-        </p>
+
+        <div>
+          <h1 className="text-2xl font-bold">{t("title")}</h1>
+          <p className="text-muted-foreground">{t("subtitle")}</p>
+        </div>
       </div>
 
       {/* PROFILE SETTINGS */}
       <Card>
         <CardHeader>
-          <CardTitle>Profil</CardTitle>
+          <CardTitle>{t("profile")}</CardTitle>
         </CardHeader>
 
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Name</label>
+            <label className="text-sm font-medium">{t("name")}</label>
             <Input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Dein Name"
+              placeholder={t("name")}
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">E-Mail</label>
+            <label className="text-sm font-medium">{t("email")}</label>
             <Input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="deine@email.com"
+              placeholder={t("email")}
             />
           </div>
 
-          <Button onClick={handleSaveProfile}>Speichern</Button>
+          <Button onClick={handleSaveProfile}>{t("save")}</Button>
         </CardContent>
       </Card>
 
       {/* SYSTEM SETTINGS */}
       <Card>
         <CardHeader>
-          <CardTitle>System</CardTitle>
+          <CardTitle>{t("system")}</CardTitle>
         </CardHeader>
 
         <CardContent className="space-y-3">
-          <p className="text-sm text-muted-foreground">
-            Systemweite Einstellungen (später erweiterbar)
-          </p>
+          <p className="text-sm text-muted-foreground">{t("systemHint")}</p>
 
           <div className="flex gap-3">
-            <Button variant="outline">Cache leeren</Button>
-
-            <Button variant="outline">Logs anzeigen</Button>
+            <Button variant="outline">{t("clearCache")}</Button>
+            <Button variant="outline">{t("showLogs")}</Button>
           </div>
         </CardContent>
       </Card>
@@ -100,16 +95,14 @@ export default function AdminSettings() {
       {/* DANGER ZONE */}
       <Card className="border-destructive">
         <CardHeader>
-          <CardTitle className="text-destructive">Danger Zone</CardTitle>
+          <CardTitle className="text-destructive">{t("danger")}</CardTitle>
         </CardHeader>
 
         <CardContent className="space-y-3">
-          <p className="text-sm text-muted-foreground">
-            Diese Aktionen sind nicht rückgängig zu machen.
-          </p>
+          <p className="text-sm text-muted-foreground">{t("dangerHint")}</p>
 
           <Button variant="destructive" onClick={handleResetSystem}>
-            System zurücksetzen
+            {t("resetSystem")}
           </Button>
         </CardContent>
       </Card>
