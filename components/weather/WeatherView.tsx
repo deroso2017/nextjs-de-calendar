@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { Sun, Cloud, CloudRain, RefreshCw } from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Sun, Cloud, CloudRain, RefreshCw } from "lucide-react";
 import { WeatherState } from "./types";
 import { Spinner } from "../ui/spinner";
 import HourlyForecast from "./HourlyForecast";
-import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
 
 function getIcon(code: number) {
   if (code === 0) return <Sun className="h-5 w-5 text-yellow-400" />;
@@ -20,6 +20,7 @@ function getIcon(code: number) {
 
 export default function WeatherView() {
   const t = useTranslations("Weather");
+  const f = useFormatter();
 
   const [city, setCity] = useState("Köln");
   const [data, setData] = useState<WeatherState | null>(null);
@@ -237,7 +238,7 @@ export default function WeatherView() {
                     <div className="flex justify-between items-center">
                       <div>
                         <p className="font-medium">
-                          {new Date(d.date).toLocaleDateString(undefined, {
+                          {f.dateTime(new Date(d.date), {
                             weekday: "long",
                             month: "short",
                             day: "numeric",
